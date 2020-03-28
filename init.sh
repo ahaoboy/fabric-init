@@ -5,8 +5,6 @@ curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
 
-
-
 # install n
 npm i n -g 
 
@@ -43,22 +41,59 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 
 # install go
-wget https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
-sudo tar -xzf go1.14.1.linux-amd64.tar.gz  -C /usr/local 
+# wget https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
+# sudo tar -xzf go1.14.1.linux-amd64.tar.gz  -C /usr/local 
 
 
-echo "export GOPATH=$HOME/go" >> ~/.bashrc
-echo "export GOROOT=/usr/local/go" >> ~/.bashrc
-echo "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin" >> ~/.bashrc
+# echo "export GOPATH=$HOME/go" >> ~/.bashrc
+# echo "export GOROOT=/usr/local/go" >> ~/.bashrc
+# echo "export PATH=$PATH:$GOROOT/bin:$GOPATH/bin" >> ~/.bashrc
+# source ~/.bashrc
+
+
+# install gvm 
+apt install bison -y
+bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
+
+gvm install go1.4 -B
+gvm use go1.4
+export GOROOT_BOOTSTRAP=$GOROOT
 source ~/.bashrc
-
  
 
 # clone repo
 git clone https://github.com/hyperledger/fabric.git --depth=1
-cd ./fabric/scripts
-./bootstrap.sh
 
+cd fabric
+git checkout v1.4.0
+./scripts/bootstrap.sh
+
+cd ..
+
+
+git clone https://github.com/hyperledger/fabric-samples.git --depth=1
+
+
+cd fabric-samples
+git checkout v1.4.0
+curl -sS https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh -o ./scripts/bootstrap.sh
+
+chmod +x ./scripts/bootstrap.sh
+
+# ./scripts/bootstrap.sh [version] [ca version] [thirdparty_version]
+./scripts/bootstrap.sh 1.4.0
+
+
+# first-network
+cd first-network
+
+./byfn.sh generate
+
+./byfn.sh up -l javascript
+
+
+
+cd ..
 
 
 
