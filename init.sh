@@ -20,11 +20,11 @@ sudo apt-get install python3 -y
 
 
 # install docker
-sudo apt-get remove docker docker-engine docker.io
+sudo apt-get remove -y docker docker-engine docker.io
 
 sudo apt-get update
 
-sudo apt-get install    apt-transport-https   ca-certificates    curl    software-properties-common
+sudo apt-get -y install    apt-transport-https   ca-certificates    curl    software-properties-common
 
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
@@ -55,7 +55,7 @@ source ~/.bashrc
  
 
 # clone repo
-git clone https://github.com/hyperledger/fabric.git
+git clone https://github.com/hyperledger/fabric.git --depth=1
 cd scripts
 ./bootstrap.sh
 
