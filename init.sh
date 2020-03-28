@@ -32,7 +32,7 @@ sudo add-apt-repository  "deb [arch=amd64] https://download.docker.com/linux/ubu
 
 sudo apt-get update
 
-sudo apt-get install docker-ce
+sudo apt-get install docker-ce -y
 
 # install docker compose
 sudo curl -L "https://github.com/docker/compose/releases/download/1.25.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -44,7 +44,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 # install go
 wget https://dl.google.com/go/go1.14.1.linux-amd64.tar.gz
-sudo tar -xzf go1.14.1.linux-amd64.tar.gz  -C /usr/local
+sudo tar -xzf go1.14.1.linux-amd64.tar.gz  -C /usr/local 
 
 
 echo "export GOPATH=$HOME/go" >> ~/.bashrc
@@ -56,7 +56,7 @@ source ~/.bashrc
 
 # clone repo
 git clone https://github.com/hyperledger/fabric.git --depth=1
-cd scripts
+cd ./fabric/scripts
 ./bootstrap.sh
 
 
