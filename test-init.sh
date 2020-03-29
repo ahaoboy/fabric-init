@@ -110,6 +110,8 @@ cd test-network
 
 TEST_PWD=${PWD}
 
+echo "export TEST_PWD=${TEST_PWD}" >> ~/.bashrc
+
 echo "export PATH=${TEST_PWD}/../bin:${TEST_PWD}:$PATH" >> ~/.bashrc
 
 
