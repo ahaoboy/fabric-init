@@ -108,36 +108,40 @@ cd test-network
 
 ./network.sh deployCC -l javascript
 
+TEST_PWD=${PWD}/fabric-samples/test-network
 
-export PATH=${PWD}/../bin:${PWD}:$PATH
+echo "export PATH=${TEST_PWD}/../bin:${TEST_PWD}:$PATH" >> ~/.bashrc
 
 
 
-export FABRIC_CFG_PATH=$PWD/../config/
+echo "export FABRIC_CFG_PATH=$TEST_PWD/../config/" >> ~/.bashrc
 
 # Environment variables for Org1
+# echo "export abcd=${PWD}/aabc" >> ~/.bashrc
 
-export CORE_PEER_TLS_ENABLED=true
-export CORE_PEER_LOCALMSPID="Org1MSP"
-export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt
-export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp
-export CORE_PEER_ADDRESS=localhost:7051
+echo "export CORE_PEER_TLS_ENABLED=true" >> ~/.bashrc
+echo "export CORE_PEER_LOCALMSPID="Org1MSP"" >> ~/.bashrc
+echo "export CORE_PEER_TLS_ROOTCERT_FILE=${TEST_PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" >> ~/.bashrc
+echo "export CORE_PEER_MSPCONFIGPATH=${TEST_PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" >> ~/.bashrc
+echo "export CORE_PEER_ADDRESS=localhost:7051" >> ~/.bashrc
+source ~/.bashrc
 
 peer chaincode query -C mychannel -n fabcar -c '{"Args":["queryAllCars"]}'
 
 
-peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls true --cafile ${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n fabcar --peerAddresses localhost:7051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"function":"changeCarOwner","Args":["CAR9","Dave"]}'
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls true --cafile ${TEST_PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem -C mychannel -n fabcar --peerAddresses localhost:7051 --tlsRootCertFiles ${TEST_PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt --peerAddresses localhost:9051 --tlsRootCertFiles ${TEST_PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt -c '{"function":"changeCarOwner","Args":["CAR9","Dave"]}'
 
 
 
 # Environment variables for Org2
 
-export CORE_PEER_TLS_ENABLED=true
-export CORE_PEER_LOCALMSPID="Org2MSP"
-export CORE_PEER_TLS_ROOTCERT_FILE=${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt
-export CORE_PEER_MSPCONFIGPATH=${PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp
-export CORE_PEER_ADDRESS=localhost:9051
+echo "export CORE_PEER_TLS_ENABLED=true" >> ~/.bashrc
+echo "export CORE_PEER_LOCALMSPID=\"Org2MSP\"" >> ~/.bashrc
+echo "export CORE_PEER_TLS_ROOTCERT_FILE=${TEST_PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" >> ~/.bashrc
+echo "export CORE_PEER_MSPCONFIGPATH=${TEST_PWD}/organizations/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp" >> ~/.bashrc
+echo "export CORE_PEER_ADDRESS=localhost:9051" >> ~/.bashrc
 
+source ~/.bashrc
 
 peer chaincode query -C mychannel -n fabcar -c '{"Args":["queryAllCars"]}'
 
