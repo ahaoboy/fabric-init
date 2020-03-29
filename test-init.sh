@@ -108,7 +108,7 @@ cd test-network
 
 ./network.sh deployCC -l javascript
 
-TEST_PWD=${PWD}/fabric-samples/test-network
+# TEST_PWD=${PWD}
 
 echo "export PATH=${TEST_PWD}/../bin:${TEST_PWD}:$PATH" >> ~/.bashrc
 
@@ -124,6 +124,7 @@ echo "export CORE_PEER_LOCALMSPID="Org1MSP"" >> ~/.bashrc
 echo "export CORE_PEER_TLS_ROOTCERT_FILE=${TEST_PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" >> ~/.bashrc
 echo "export CORE_PEER_MSPCONFIGPATH=${TEST_PWD}/organizations/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp" >> ~/.bashrc
 echo "export CORE_PEER_ADDRESS=localhost:7051" >> ~/.bashrc
+
 source ~/.bashrc
 
 peer chaincode query -C mychannel -n fabcar -c '{"Args":["queryAllCars"]}'
