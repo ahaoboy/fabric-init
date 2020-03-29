@@ -108,7 +108,7 @@ cd test-network
 
 ./network.sh deployCC -l javascript
 
-# TEST_PWD=${PWD}
+TEST_PWD=${PWD}
 
 echo "export PATH=${TEST_PWD}/../bin:${TEST_PWD}:$PATH" >> ~/.bashrc
 
@@ -117,7 +117,7 @@ echo "export PATH=${TEST_PWD}/../bin:${TEST_PWD}:$PATH" >> ~/.bashrc
 echo "export FABRIC_CFG_PATH=$TEST_PWD/../config/" >> ~/.bashrc
 
 # Environment variables for Org1
-# echo "export abcd=${PWD}/aabc" >> ~/.bashrc
+
 
 echo "export CORE_PEER_TLS_ENABLED=true" >> ~/.bashrc
 echo "export CORE_PEER_LOCALMSPID="Org1MSP"" >> ~/.bashrc
