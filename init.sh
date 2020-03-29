@@ -1,6 +1,7 @@
 echo "init"
 
 # install node
+apt update
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
@@ -52,13 +53,16 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
 
 # install gvm 
-apt install bison -y
+sudo apt install bison gcc make  binutils  -y
+
 bash < <(curl -s -S -L https://raw.githubusercontent.com/moovweb/gvm/master/binscripts/gvm-installer)
 
-gvm install go1.4 -B
-gvm use go1.4
-export GOROOT_BOOTSTRAP=$GOROOT
-source ~/.bashrc
+source $HOME/.gvm/scripts/gvm
+
+gvm install go1.14 -B
+gvm use go1.14
+# export GOROOT_BOOTSTRAP=$GOROOT
+# source ~/.bashrc
  
 
 # clone repo
@@ -81,7 +85,7 @@ curl -sS https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/boo
 chmod +x ./scripts/bootstrap.sh
 
 # ./scripts/bootstrap.sh [version] [ca version] [thirdparty_version]
-./scripts/bootstrap.sh 1.4.0
+# ./scripts/bootstrap.sh 1.4.0
 
 
 # first-network
